@@ -25,21 +25,15 @@ Simulating dynamical systems in Computational Neuroscience using Brian2. Investi
 
 ---
 ## Experiment 3: Decision Making (Winner-Take-All)
-**Objective:**  
-Model how a neural network resolves conflict between two competing inputs using **lateral inhibition**.
+**Objective:** Model how a neural network resolves conflict between two competing inputs using **lateral inhibition**.
 
-* **Method:**  
-Two neurons inhibit each other via mutual inhibitory synapses (`v_post -= 30 mV`).  
-Neuron A receives a slightly stronger constant input than Neuron B, representing asymmetric evidence.
+* **Method:** Two neurons inhibit each other via mutual inhibitory synapses (`v_post -= 30 mV`). Neuron A receives a slightly stronger constant input than Neuron B, representing asymmetric evidence.
 
-* **Analysis:**  
-We utilize **phase-plane analysis** (plotting $V_A$ vs $V_B$) to visualize the system’s trajectory toward a **decision attractor**.
+* **Analysis:** We utilize **phase-plane analysis** (plotting $V_A$ vs $V_B$) to visualize the system’s trajectory toward a **decision attractor**.
 
-* **Key Result:**  
-Despite both inputs being suprathreshold, the network converges to a single winner.  
-Neuron A fires first and completely suppresses Neuron B, demonstrating **winner-take-all dynamics**, race-to-threshold behavior, and neural contrast enhancement.
+* **Key Result:** Despite both inputs being suprathreshold, the network converges to a single winner. Neuron A fires first and completely suppresses Neuron B, demonstrating **winner-take-all dynamics**, race-to-threshold behavior, and neural contrast enhancement.
 
-**Phase Plane Trajectory:**  
+**Resulting Plot:**
 ![Decision Plot](plots/experiment3_decision.png)
 
 ---
