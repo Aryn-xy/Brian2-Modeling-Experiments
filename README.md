@@ -14,3 +14,13 @@ Simulating dynamical systems in Computational Neuroscience using Brian2. Investi
 ![F-I Curve](plots/experiment1_FI_curve.png)
 
 ---
+## Experiment 2: Synaptic Transmission (The EPSP)
+**Objective:** Model the transmission of chemical signals between a "Source" neuron and a "Target" neuron.
+
+* **Mechanism:** A pre-synaptic spike triggers an instantaneous increase in post synaptic voltage (`v_post += 5*mV`).
+* **Key Result:** We observe **Temporal Summation**. The Target neuron integrates incoming spikes. Since the input frequency is high, the voltage "staircases" upward because the membrane potential does not fully decay between inputs.
+
+**Resulting Plot:**
+![EPSP Synapse](plots/experiment2_synapse.png)
+
+---
