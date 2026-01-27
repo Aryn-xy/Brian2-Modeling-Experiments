@@ -24,21 +24,22 @@ Simulating dynamical systems in Computational Neuroscience using Brian2. Investi
 ![EPSP Synapse](plots/experiment2_synapse.png)
 
 ---
-## Experiment 3: Neural Decision Making (Winner-Take-All)
-**Objective:** Model how a neural network resolves conflict between two competing inputs using **Lateral Inhibition**. This simulation uses a competitive network architecture where the winner silences the loser.
+## Experiment 3: Decision Making (Winner-Take-All)
+**Objective:**  
+Model how a neural network resolves conflict between two competing inputs using **lateral inhibition**.
 
-**1. The Physics (LIF Model)**
-We use the Leaky Integrate-and-Fire equation:
-$$\frac{dv}{dt} = \frac{(v_{rest} - v + I)}{tau}$$
-* **Input Bias:** Neuron A receives slightly more current ($25mV$) than Neuron B ($22mV$). Without inhibition, both would fire.
+* **Method:**  
+Two neurons inhibit each other via mutual inhibitory synapses (`v_post -= 30 mV`).  
+Neuron A receives a slightly stronger constant input than Neuron B, representing asymmetric evidence.
 
-**2. The Wiring (Lateral Inhibition)**
-The crucial logic lies in the synapse definition:
-```python
-S = Synapses(G, G, on_pre='v_post -= 30*mV')
-S.connect(condition='i != j')```
+* **Analysis:**  
+We utilize **phase-plane analysis** (plotting $V_A$ vs $V_B$) to visualize the system’s trajectory toward a **decision attractor**.
 
-**Resulting Plot:**
+* **Key Result:**  
+Despite both inputs being suprathreshold, the network converges to a single winner.  
+Neuron A fires first and completely suppresses Neuron B, demonstrating **winner-take-all dynamics**, race-to-threshold behavior, and neural contrast enhancement.
+
+**Phase Plane Trajectory:**  
 ![Decision Plot](plots/experiment3_decision.png)
 
 ---
