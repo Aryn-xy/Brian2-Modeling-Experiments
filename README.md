@@ -41,6 +41,37 @@ Simulating dynamical systems in Computational Neuroscience using Brian2. Investi
 * **LTP (Strengthening):** If Pre-spike $\to$ Post-spike (causal), increase weight ($w$).
 * **LTD (Weakening):** If Post-spike $\to$ Pre-spike (acausal), decrease weight ($w$).
 
+**Resulting Plot:**
 ![STDP Plot](plots/experiment4_stdp.png)
+
+---
+## Experiment 5: Pattern Recognition (Signal vs Noise)
+**Objective:** Test whether a single spiking neuron using STDP can automatically detect temporally correlated inputs embedded within random noise.
+
+### The Setup
+* **Neuron:** 1 postsynaptic LIF neuron.
+* **Inputs:** 20 presynaptic channels.
+    * **Signal (0–9):** Fire synchronously every 50 ms (Correlated).
+    * **Noise (10–19):** Fire randomly (Uncorrelated).
+
+### The Logic (Hebbian Learning)
+Same as experiment 4.
+* **Pre $\to$ Post:** Potentiation (LTP).
+* **Post $\to$ Pre:** Depression (LTD).
+* **Hypothesis:** Correlated inputs should strengthen (cause spikes), while random inputs should remain weak or decay.
+
+### The Result
+* **Signal Weights (Green):** Increased from 0.5 to **~0.75** (Selective Strengthening).
+* **Noise Weights (Red):** Remained near baseline **~0.50** (No significant correlation).
+* **Stability:** Learning stabilized after ~2–3 seconds.
+
+### Interpretation
+The neuron selectively strengthened synapses that consistently preceded its firing. This demonstrates:
+1.  **Correlation Detection:** The neuron found the hidden pattern.
+2.  **Competitive Learning:** The signal inputs "won" control over the neuron's firing.
+3.  **Emergent Selectivity:** STDP alone is sufficient for a neuron to ignore uninformative noise without supervision.
+
+**Resulting Plot:**
+![Pattern Plot](plots/experiment5_pattern.png)
 
 ---
