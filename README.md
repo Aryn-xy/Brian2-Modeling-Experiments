@@ -35,3 +35,12 @@ Simulating dynamical systems in Computational Neuroscience using Brian2. Investi
 ![Decision Plot](plots/experiment3_decision.png)
 
 ---
+## Experiment 4: Synaptic Learning (STDP)
+**Objective:** Model biological learning using **Spike-Timing Dependent Plasticity (STDP)**. The synapse self adjusts its strength based on the precise timing of spikes. We replace the static synapse with a dynamic differential equation.
+
+* **LTP (Strengthening):** If Pre-spike $\to$ Post-spike (causal), increase weight ($w$).
+* **LTD (Weakening):** If Post-spike $\to$ Pre-spike (acausal), decrease weight ($w$).
+
+![STDP Plot](plots/experiment4_stdp.png)
+
+---
