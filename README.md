@@ -75,3 +75,69 @@ The neuron selectively strengthened synapses that consistently preceded its firi
 ![Pattern Plot](plots/experiment5_pattern.png)
 
 ---
+## Experiment 6: Reinforcement Learning with Eligibility Traces
+**Objective:** Demonstrate distal reward learning using a biologically plausible 3 factor learning rule (pre-synaptic activity, post-synaptic activity, and neuromodulatory signal) to address the temporal credit assignment problem.
+
+### The Learning Mechanism (Dopamine-Gated Plasticity)
+Classical pair-based STDP updates synapses at spike timing and does not inherently account for delayed reinforcement signals. To overcome this limitation, we separate synaptic eligibility from weight consolidation. This constitutes a three-factor learning rule, where synaptic change depends on (1) pre/post activity, (2) a synaptic eligibility trace, and (3) a global neuromodulatory signal.
+
+**1. Eligibility Trace ($c$)**
+Each presynaptic spike leaves a decaying trace:
+$$\frac{dc}{dt} = -\frac{c}{\tau_c}$$
+This trace represents a temporary memory of recent synaptic activity.
+
+**2. Dopamine-Gated Update**
+The synaptic weight evolves according to:
+$$\frac{dw}{dt} = \eta \, c \, D \, (w_{max} - w) w$$
+
+Where:
+* $D$ is the dopamine reward signal.
+* $\eta$ is the learning rate.
+* $(w_{max} - w)w$ ensures multiplicative soft bounds in the range $[0, 1]$.
+
+Thus, weight changes occur only when dopamine overlaps with a non-zero eligibility trace.
+
+### Key Result
+* **During stimulus presentation:** eligibility trace rises.
+* **During delay:** trace decays exponentially.
+* **When dopamine arrives:** weight increases proportionally to the remaining trace.
+* **After dopamine ends:** Learning stops.
+
+This demonstrates delayed reinforcement learning through a biologically plausible 3 factor rule.
+
+**Resulting Plot:**
+![Eligibility Trace Plot](plots/experiment6_eligibility.png)
+
+---
+## Experiment 7: Quantifying the Credit Assignment Window (Delay Sweep)
+**Objective:** Measure how synaptic learning strength depends on the temporal delay between stimulus and reward.
+
+### Experimental Design
+A parameter sweep was conducted over 15 trials:
+1. Stimulus induces eligibility trace formation.
+2. A variable delay (0–700 ms) is introduced.
+3. Dopamine reward is applied.
+4. Final synaptic weight is recorded.
+
+*The simulation is reset between trials to ensure independent measurements.*
+
+### Results
+Because the eligibility trace decays exponentially:
+$$c(t) = c_0 e^{-t/\tau_c}$$
+The effective reinforcement signal $c(t_{delay})D$ decreases as reward delay increases. The final weight exhibits a clear exponential dependence on reward delay:
+* **0 ms delay:** strong potentiation ($w \approx 0.97$)
+* **150 ms delay:** moderate learning ($w \approx 0.68$)
+* **>500 ms delay:** minimal learning ($w \approx 0.50$)
+
+Learning effectively vanishes once the delay exceeds $\approx 3\tau_c$, consistent with theoretical predictions.
+
+### Interpretation
+The temporal extent of reinforcement learning is governed by the eligibility trace time constant $\tau_c$. This experiment quantitatively demonstrates how synaptic eligibility traces define a finite temporal window for reinforcement, thereby providing a mechanistic solution to the temporal credit assignment problem.
+
+**Resulting Plot:**
+![Reward Delay Plot](plots/experiment7_reward_delay.png)
+
+---
+Together, experiments 6 & 7 demonstrate that reinforcement learning in spiking networks emerges from the interaction between transient synaptic eligibility and temporally precise neuromodulatory signaling.
+
+---
