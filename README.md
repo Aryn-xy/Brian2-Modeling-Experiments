@@ -1,5 +1,5 @@
-# Brian2-Modeling-Experiments
-Simulating dynamical systems in Computational Neuroscience using Brian2. Investigating neuronal dynamics, population coding, and emergent network behavior
+# Brian2 Modeling Experiments
+Simulating dynamical systems in Computational Neuroscience using Brian2. Investigating neuronal dynamics, population coding, and emergent network behavior.
 
 **Tools:** Python, Brian2, Matplotlib, Numpy 
 ---
