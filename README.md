@@ -141,3 +141,30 @@ The temporal extent of reinforcement learning is governed by the eligibility tra
 Together, experiments 6 & 7 demonstrate that reinforcement learning in spiking networks emerges from the interaction between transient synaptic eligibility and temporally precise neuromodulatory signaling.
 
 ---
+## Experiment 8: Ring Attractor Network (Bump Attractor Dynamics)
+**Objective:** Demonstrate how recurrent neural connectivity generates a stable, localised **activity bump** that serves as a working-memory substrate — a canonical example of computational attractor dynamics.
+
+### Architecture
+* **Network:** 100 LIF neurons arranged on a ring, representing a continuous feature space (e.g., head direction, spatial location, or stimulus angle).
+* **Connectivity:** **Mexican-hat** (Difference-of-Gaussians) recurrent synapses — neurons excite their close neighbours and weakly inhibit all neurons via a global uniform term. This produces the local-excitation / lateral-inhibition motif essential for bump formation.
+
+### Experimental Protocol
+1. **Baseline (0–50 ms):** No external input. The network is silent, confirming there is no spontaneous activity below threshold.
+2. **Stimulus ON (50–150 ms):** A localised transient input (centred on neuron 50, half-width 5 neurons) is applied, pushing those neurons above threshold and seeding the bump.
+3. **Stimulus OFF (150–300 ms):** The external input is removed. Recurrent excitation within the bump sustains activity; global inhibition prevents the remaining neurons from firing.
+
+### Key Results
+* **Bump formation:** Activity concentrates at the stimulus location (~40 neurons of 100) during the input phase.
+* **Persistent attractor state:** After stimulus offset the bump continues firing, centred precisely on neuron 50, with no external support — demonstrating **working memory**.
+* **Selectivity:** Neurons far from the stimulus remain completely silent throughout, confirming the bump does not spread to fill the ring.
+
+### Interpretation
+The network settles into one of infinitely many neutrally-stable fixed points along the ring (a **continuous attractor manifold**). The stimulus selects which point is occupied; recurrent connectivity maintains it. This is the computational basis for:
+1. **Spatial working memory** — the hippocampal/prefrontal maintenance of location or object identity.
+2. **Head-direction cells** — thalamic and cortical circuits that track orientation.
+3. **Path integration** — continuous updating of a position estimate without sensory input.
+
+**Resulting Plot:**
+![Attractor Plot](plots/experiment8_attractor.png)
+
+---
